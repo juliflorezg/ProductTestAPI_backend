@@ -1,8 +1,9 @@
 ﻿using ProductAPI_backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProductAPI_backend.Repository
 {
-    public class ProductsRepository : IRepository<Product>
+    public class ProductsRepository : IRepository<Product, Guid>
     {
 
         public ProductsRepository(Context context)
@@ -12,38 +13,21 @@ namespace ProductAPI_backend.Repository
 
         private readonly Context _context;
 
-        public Task<IEnumerable<Product>> Get()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<Product>> Get() => await _context.Products.ToListAsync();
 
-        public Task<Product?> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Product?> GetById(Guid id) => await _context.Products.FindAsync(id);
 
-        public Task Add(Product entity)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task Add(Product entity) => await _context.AddAsync(entity);
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            _context.Products.Update(entity);
+            _context.Products.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Delete(Product entity)
-        {
-            throw new NotImplementedException();
-        }
-        public Task Save()
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(Product entity) => _context.Products.Remove(entity);
+        public Task Save() => _context.SaveChangesAsync();
 
-        public IEnumerable<Product> Search(Func<Product, bool> filter)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Product> Search(Func<Product, bool> filter) => _context.Products.Where(filter).ToList();
 
     }
 }
