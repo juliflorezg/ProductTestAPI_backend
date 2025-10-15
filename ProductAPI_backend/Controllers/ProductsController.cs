@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProductTestAPI.Controllers
@@ -27,5 +28,36 @@ namespace ProductTestAPI.Controllers
         }
     }
 
+
+    public class ProductDTO
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+
+
+        public decimal Price { get; set; }
+
+        public int Stock { get; set; }
+    }
+    public class ProductInsertDTO
+    {
+
+        public string Name { get; set; }
+
+
+        public decimal Price { get; set; }
+
+        public int Stock { get; set; }
+    }
+    public class ProductUpdateDTO
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+
+
+        public decimal Price { get; set; }
+
+        public int Stock { get; set; }
+    }
 
 }
