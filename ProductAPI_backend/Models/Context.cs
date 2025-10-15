@@ -6,7 +6,6 @@ namespace ProductAPI_backend.Models
     {
         public Context(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<Product> Products { get; set; }
