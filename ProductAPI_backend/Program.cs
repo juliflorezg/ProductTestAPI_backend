@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins("http://localhost:5173", "https://lemon-stone-0c62b0b0f.1.azurestaticapps.net/")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
